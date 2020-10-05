@@ -11,27 +11,27 @@ add_executable(helloworld_cli main.cpp)
 
 add_library(helloworld_lib lib.cpp)
 
-add_executable(helloworld_test_version test_version.cpp)
+add_executable(helloworld_version_unittest version_unittest.cpp)
 
-set_target_properties(helloworld_cli helloworld_lib helloworld_test_version PROPERTIES
+set_target_properties(helloworld_cli helloworld_lib helloworld_version_unittest PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
-set_target_properties(helloworld_test_version PROPERTIES
+set_target_properties(helloworld_version_unittest PROPERTIES
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
 target_link_libraries(helloworld_cli
-    helloworld
+    helloworld_lib
     Threads::Threads
 )
 
-target_link_libraries(helloworld_test_version
+target_link_libraries(helloworld_version_unittest
     ${Boost_LIBRARIES}
-    helloworld
+    helloworld_lib
 )
 
 install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
@@ -50,4 +50,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(helloworld_tests helloworld_test_version)
+add_test(helloworld_tests helloworld_version_unittest)
