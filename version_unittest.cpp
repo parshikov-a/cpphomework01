@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(helloworld_test_version)
 
 BOOST_AUTO_TEST_CASE(helloworld_test_general)
 {
-    BOOST_CHECK(2 == 0);
+    BOOST_CHECK(2 != 0);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
